@@ -17,9 +17,9 @@ pipeline{
                     //copy WAR FILE TO TOMCAT
                     sh "scp -o StrictHostKeyChecking=no target/doctor-online.war ec2-user@54.81.141.14:/opt/tomcat9/webapps"
                     //stop tomcat
-                    sh "ssh ec2-user@54.81.141.14 /opt/tomcat9/bin/shutdown.sh"
+                    sh "ssh ec2-user@107.20.31.195 /opt/tomcat9/bin/shutdown.sh"
                     //start tomcat
-                    sh "ssh ec2-user@54.81.141.14 /opt/tomcat9/bin/startup.sh"
+                    sh "ssh ec2-user@107.20.31.195 /opt/tomcat9/bin/startup.sh"
 }
             }
         }
