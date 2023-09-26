@@ -14,6 +14,9 @@ sh "mvn clean package"
 }
 }
 stage("nexus upload"){
+    when {
+expression { params.envName == "dev" }
+}
     steps{
         script{
             def pom=readMavenPom file: 'pom.xml'
