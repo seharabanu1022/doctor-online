@@ -13,6 +13,26 @@ steps{
 sh "mvn clean package"
 }
 }
+stage("nexus upload"){
+    steps{
+        script{
+            def pom=readMavenPom file: 'pom.xml'
+            def version = pom.version
+            def repoName ="doctor-online-release"
+            if(version.endsWith("SNAPSHOT")){
+                repoName="doctor-online-snapshot"
+            }
+        nexusArtifactUploader artifacts: [[artifactId: 'doctor-online', classifier: '', file: 'target/doctor-online.war', type: 'war']],
+        credentialsId: 'nexus3',
+        groupId: 'in.javahome',
+        nexusUrl: '18.206.212.54:8081',
+        nexusVersion: 'nexus3',
+        protocol: 'http',
+        repository: 'doctor-online-snapshot',
+        version: '1.0-SNAPSHOT'
+        }
+    }
+}
 stage("Deploy To Dev"){
 when {
 expression { params.envName == "dev" }
