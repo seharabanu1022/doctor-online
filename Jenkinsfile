@@ -1,15 +1,23 @@
 def incrementVersion(currentVersion) {
-    def versionParts = currentVersion.split('\\.')
-    int major = versionParts[0] as Integer
-    int minor = versionParts[1] as Integer
-    int patch = versionParts[2] as Integer
+    if (currentVersion.endsWith("-SNAPSHOT")) {
+        def versionParts = currentVersion.replaceAll("-SNAPSHOT", "").split('\\.')
+        if (versionParts.size() == 3) {
+            int major = versionParts[0] as Integer
+            int minor = versionParts[1] as Integer
+            int patch = versionParts[2] as Integer
 
-    // Increment the patch version for a production release
-    patch++
+            // Increment the patch version for a production release
+            patch++
 
-    // Assemble the new version string
-    return "$major.$minor.$patch"
+            // Assemble the new version string
+            return "$major.$minor.$patch"
+        }
+    }
+
+    echo "Invalid version format: $currentVersion"
+    return currentVersion
 }
+
 
 pipeline{
     agent any
