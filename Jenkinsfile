@@ -42,7 +42,7 @@ pipeline{
                     def pom = readMavenPom file: 'pom.xml'
                     def version = pom.version
                     sh """
-                    sudo wget -O /home/ec2-user/doctor-online.war -u $USERPASS -X GET "${env.NEXUS_URL}/repository/doctor-online-release/in/javahome/doctor-online/${version}/doctor-online-${version}.war"
+                    scp admin@:172.31.30.87:8081/repository/doctor-online-release/in/javahome/doctor-online/${version}/doctor-online-${version}.war /home/ec2-user/doctor-online.war
                                     """
                     }
                 }
