@@ -42,7 +42,7 @@ pipeline{
                     def pom = readMavenPom file: 'pom.xml'
                     def version = pom.version
                     sh """
-                    curl -o /home/ec2-user/doctor-online.war -u $USERPASS -X GET "${env.NEXUS_URL}/repository/doctor-online-release/in/javahome/doctor-online/${version}/doctor-online-${version}.war"
+                    sudo wget -O /home/ec2-user/doctor-online.war -u $USERPASS -X GET "${env.NEXUS_URL}/repository/doctor-online-release/in/javahome/doctor-online/${version}/doctor-online-${version}.war"
                                     """
                     }
                 }
