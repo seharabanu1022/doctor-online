@@ -1,0 +1,6 @@
+version: '3'
+services:
+  web:
+    image: seharabanu1022/do:0.0.1
+    ports:
+      - "8080:8080" # Map the container's port to a host port
